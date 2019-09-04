@@ -1,15 +1,13 @@
 const fs = require('fs')
 const chalk = require('chalk');
 
-const getNotes = () => {
-    return 'Your notes...' 
-};
-
+// Function to create JSON file for add/removing notes
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON)
 };
 
+// Function for loading notes from JSON file
 const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json');
@@ -20,6 +18,7 @@ const loadNotes = () => {
     }
 };
 
+// Function for adding new notes to JSON file
 const addNote = (title, body) => {
     const notes = loadNotes();
     const duplicateNote = notes.find(note => note.title === title);
@@ -36,6 +35,7 @@ const addNote = (title, body) => {
     }
 };
 
+// Function for removing notes from JSON file
 const removeNote = (title) => {
     const notes = loadNotes();
 
@@ -50,6 +50,7 @@ const removeNote = (title) => {
 
 };
 
+//Function for listing saved note titles 
 const listNotes = () => {
     const notes = loadNotes();
 
@@ -60,6 +61,7 @@ const listNotes = () => {
     });
 };
 
+//Function for printing out body of a note
 const readNote = (title) => {
     const notes = loadNotes();
     const noteToRead = notes.find(note => note.title === title);
